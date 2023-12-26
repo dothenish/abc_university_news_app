@@ -3,13 +3,13 @@ class News {
   final String description;
   final String category;
   final DateTime dateAdded;
-  bool isFavourited;
+  bool isFavorited;
 
   News({
     required this.title,
     required this.description,
     required this.category,
     required this.dateAdded,
-    this.isFavourited = false
+    this.isFavorited = false
   });
 }

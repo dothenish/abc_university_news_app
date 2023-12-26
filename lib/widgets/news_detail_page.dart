@@ -30,7 +30,7 @@ class NewsDetailPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Title: $title', style: TextStyle(fontSize: 20.0)),
+            Text('$title', style: TextStyle(fontSize: 20.0)),
             SizedBox(height: 8.0),
             Text('Category: $category'),
             SizedBox(height: 8.0),

@@ -3,8 +3,7 @@ import 'package:umt_news_app/widgets/news_detail_page.dart';
 import 'add_news_page.dart';
 import 'package:umt_news_app/models/news.dart';
 import 'package:intl/intl.dart';
-
-
+import '../widgets/favourites_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -20,7 +19,11 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-   @override
+  void onNewsChanged() {
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -40,22 +43,39 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Expanded(
-            child: NewsList(newsList),
+            child: NewsList(newsList: newsList, onNewsChanged: onNewsChanged),
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AddNewsPage(
-                onNewsAdded: addNews,
-              ),
-            ),
-          );
-        },
-        child: const Icon(Icons.add),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddNewsPage(
+                    onNewsAdded: addNews,
+                  ),
+                ),
+              );
+            },
+            child: Icon(Icons.add),
+          ),
+          SizedBox(height: 16.0),
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => FavouritesPage(newsList),
+                ),
+              );
+            },
+            child: Icon(Icons.favorite),
+          ),
+        ],
       ),
     );
   }
@@ -63,15 +83,16 @@ class _HomePageState extends State<HomePage> {
 
 class NewsList extends StatelessWidget {
   final List<News> newsList;
+  final Function onNewsChanged;
 
-  NewsList(this.newsList);
+  NewsList({required this.newsList, required this.onNewsChanged});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: newsList.length,
       itemBuilder: (context, index) {
-        return NewsCard(newsList[index]);
+        return NewsCard(news: newsList[index], onNewsChanged: onNewsChanged);
       },
     );
   }
@@ -79,8 +100,9 @@ class NewsList extends StatelessWidget {
 
 class NewsCard extends StatelessWidget {
   final News news;
+  final Function onNewsChanged;
 
-  NewsCard(this.news);
+  NewsCard({required this.news, required this.onNewsChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +121,17 @@ class NewsCard extends StatelessWidget {
             Text('Description: ${news.description}'),
             Text('Date Added: $formattedDate $formattedTime'),
           ],
+        ),
+        trailing: IconButton(
+          icon: Icon(
+            news.isFavorited ? Icons.favorite : Icons.favorite_border,
+            color: news.isFavorited ? Colors.red : null,
+          ),
+          onPressed: () {
+            // Toggle the isFavorited property
+            news.isFavorited = !news.isFavorited;
+            onNewsChanged(); // Trigger the callback
+          },
         ),
         onTap: () {
           Navigator.push(
