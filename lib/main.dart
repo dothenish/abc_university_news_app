@@ -9,9 +9,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'UMT News App',
       theme: ThemeData(
-        primaryColor: Colors.indigo,
+        primarySwatch: Colors.indigo,
       ),
       home: HomePage(), //HomePage UI is retrived from home_page.dart
     );
