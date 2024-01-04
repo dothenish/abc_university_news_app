@@ -1,42 +1,84 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:umt_news_app/models/news.dart';
+import 'package:umt_news_app/widgets/add_news_page.dart';
 import '../widgets/home_page.dart';
 import 'bottom_navigation.dart';
 
-class FavouritesPage extends StatelessWidget {
+class FavouritesPage extends StatefulWidget {
   final List<News> newsList;
+  
 
-  FavouritesPage(this.newsList);
+  const FavouritesPage(
+    this.newsList, 
+    {super.key}
+    );
+
+  @override
+  State<FavouritesPage> createState() => _FavouritesPageState();
+  }
+
+class _FavouritesPageState extends State<FavouritesPage> {
+  List<News> newsList = [];
+  
+    void addNews(News news) {
+      setState(() {
+        widget.newsList.add(news);
+        });
+    }
+
+    void navigateToHomePage() {
+      Navigator.pushNamed(
+        context, 
+        '/homepage');
+    }
+
+    void navigateToFavorites() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FavouritesPage(newsList),
+      ),
+    );
+  }
+
+    void navigateToAddNews() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AddNewsPage(
+          onNewsAdded: addNews,
+        ),
+      ),
+    );
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
-    List<News> favouritedNewsList = newsList.where((news) => news.isFavorited).toList();
-
+    List<News> favouritedNewsList = widget.newsList.where((news) => news.isFavorited).toList();
+    
     return Scaffold(
+      backgroundColor: Colors.teal[100],
       appBar: AppBar(
-        backgroundColor: Colors.indigo,
-        title: Text('Favourites'),
+        backgroundColor: Colors.teal,
+        title: Text('Favourites',
+        style: GoogleFonts.nunito(
+          fontWeight: FontWeight.bold
+        ),),
         centerTitle: true,
       ),
       body: NewsList(newsList: favouritedNewsList, onNewsChanged: () {}),
 
-       bottomNavigationBar: BottomNavigation(
-        onAddNews: () {
-          // Handle add news action
-          // You may want to navigate to the add news page
-        },
-        onShowFavorites: () {
-          // You are already on the favourites page, handle accordingly
-        },
-      ),
-      floatingActionButton: FloatingAddButton(
-        onPressed: () {
-          // Handle add news action
-          // You may want to navigate to the add news page
-        },
-      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      
+      floatingActionButton: FloatingAddButton(
+        onAddNews: navigateToAddNews
+        ),
+        bottomNavigationBar: BottomNavigation(
+          onShowFavorites: navigateToFavorites,
+          toHomePage: navigateToHomePage,
+          ),
     );
   }
 }

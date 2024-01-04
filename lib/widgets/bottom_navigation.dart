@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 
 class BottomNavigation extends StatelessWidget {
-  final Function onAddNews;
   final Function onShowFavorites;
+  final Function toHomePage;
 
-  BottomNavigation({
-    required this.onAddNews,
+  const BottomNavigation({super.key, 
     required this.onShowFavorites,
+    required this.toHomePage
   });
 
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
+      color: Colors.teal[50],
       height: 50,
       shape: const CircularNotchedRectangle(),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              toHomePage();
+            },
             icon: const Icon(
               Icons.home,
               color: Colors.black,
@@ -42,18 +45,19 @@ class BottomNavigation extends StatelessWidget {
 }
 
 class FloatingAddButton extends StatelessWidget {
-  final Function onPressed;
+    final Function onAddNews;
 
-  FloatingAddButton({required this.onPressed});
+  const FloatingAddButton({super.key, required this.onAddNews});
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      backgroundColor: Colors.indigo,
+      backgroundColor: Colors.orangeAccent[100],
       onPressed: () {
-        onPressed();
+        onAddNews();
       },
-      child: const Icon(Icons.add),
+      child: const Icon(Icons.add,
+      color: Colors.black),
     );
   }
 }
