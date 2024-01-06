@@ -1,6 +1,12 @@
+/*=====================================================
+* Program: main.dart
+* Purpose: Main program to run the UMT News App
+* Notes: define routes, call onBoardingPage()
+*======================================================
+*/
 import 'package:flutter/material.dart';
-import 'widgets/home_page.dart';
-import 'widgets/on_boarding_page.dart';
+import 'views/screen/home_page.dart';
+import 'views/screen/on_boarding_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,14 +20,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'UMT News App',
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-      ),
-      initialRoute: '/',
+      //defining route for the app
+      initialRoute: '/onboarding',
       routes: {
-        '/homepage':(context) => const HomePage()
+        '/onboarding':(context) => const OnBoardingPage(),
+        '/homepage':(context) => const HomePage(),
       },
-      //home: const HomePage(),
+      //The app will first show the onboarding page when the program is being run.
       home: const OnBoardingPage(),
     );
   }

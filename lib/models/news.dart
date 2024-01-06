@@ -16,6 +16,4 @@ class News {
     this.isFavorited = false,
     this.imageUrl = "",
   });
-
-  //dummy data to test the ui
 }
