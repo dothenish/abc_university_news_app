@@ -6,11 +6,11 @@
 */
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:umt_news_app/views/bottom_navigation.dart';
+import 'package:umt_news_app/views/widgets/bottom_navigation.dart';
 import 'add_news_page.dart';
 import 'package:umt_news_app/models/news.dart';
 import 'favourites_page.dart';
-import '../news_card.dart';
+import '../widgets/news_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

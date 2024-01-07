@@ -40,7 +40,6 @@ Widget build(BuildContext context) {
     body: Stack(
       alignment: Alignment.center,
       children: [
-        
         LiquidSwipe(
           // Making on boarding screen into 3 pages
           pages: [

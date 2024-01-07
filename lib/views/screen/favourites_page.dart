@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:umt_news_app/models/news.dart';
 import 'package:umt_news_app/views/screen/add_news_page.dart';
 import 'home_page.dart';
-import '../bottom_navigation.dart';
+import '../widgets/bottom_navigation.dart';
 
 class FavouritesPage extends StatefulWidget {
   final List<News> newsList;
