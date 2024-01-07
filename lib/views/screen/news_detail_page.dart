@@ -1,3 +1,9 @@
+/*=====================================================
+* Program: news_detail_page.dart
+* Purpose: Display the news detail when a news card is clicked.
+* Notes: 
+*======================================================
+*/
 import 'dart:io';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +20,7 @@ class NewsDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //Display news date added
     String formattedDate = DateFormat('yyyy-MM-dd').format(news.dateAdded);
 
     return Scaffold(
@@ -59,6 +66,7 @@ class NewsDetailPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(30.0),
               child: Image.file(
                 File(news.imageUrl),
+                //Display the uploaded image in its full size without having image to be cropped out
                 fit: BoxFit.cover,
                 width: MediaQuery.of(context).size.width,
               ),

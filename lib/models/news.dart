@@ -1,11 +1,17 @@
+/*=====================================================
+* Program: news.dart
+* Purpose: News object with its attributes
+* Notes:
+*======================================================
+*/
 class News {
   final String title;
   final String author;
   final String description;
   final String category;
   final DateTime dateAdded;
-  bool isFavorited;
-  String imageUrl;
+  bool isFavorited; // to bookmark a news
+  String imageUrl; //to upload image
 
   News({
     required this.title,
